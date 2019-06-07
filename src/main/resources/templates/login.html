@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>登录</title>
 </head>
 <body>
+
+<form method="post" action="/login">
+    <h2 class="form-signin-heading">登录</h2>
+    <span th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+    <p>
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" value="admin" required autofocus>
+    </p>
+    <p>
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" value="123456" required>
+    </p>
+    <button type="submit">登录</button>
+    <hr>
+</form>
+
 <a href="/qqLogin/callback.do">QQ登录</a>
 <a href="/qqLogin/weixin">微信登录</a>
 </body>

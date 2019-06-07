@@ -11,8 +11,10 @@ import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 
@@ -88,4 +90,11 @@ public class SocialConfiguration extends SocialConfigurerAdapter {
     public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
         return new ProviderSignInUtils(connectionFactoryLocator, getUsersConnectionRepository(connectionFactoryLocator));
     }
+
+    @Bean
+    public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
+        return new ConnectController(connectionFactoryLocator, connectionRepository);
+    }
+
+
 }
